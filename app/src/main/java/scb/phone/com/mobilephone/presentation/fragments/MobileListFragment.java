@@ -41,7 +41,7 @@ public class MobileListFragment extends BaseFragment implements MobileListView {
 
     MobileListAdapter adapter;
 
-    List<Integer> favoriteIds = new ArrayList<>();
+    List<PhoneListDisplayEntity> favoriteIds = new ArrayList<>();
 
     List<PhoneListDisplayEntity> displayEntityList;
 
@@ -83,7 +83,7 @@ public class MobileListFragment extends BaseFragment implements MobileListView {
 
     @Override
     public void onFavoriteClick(PhoneListDisplayEntity phoneListDisplayEntity, int position) {
-        favoriteIds.add(phoneListDisplayEntity.getId());
+        favoriteIds.add(phoneListDisplayEntity);
         adapter.notifyItemChanged(position);
         if (mFragmentInteract != null) {
             mFragmentInteract.onFavoriteClick(phoneListDisplayEntity);
@@ -103,6 +103,11 @@ public class MobileListFragment extends BaseFragment implements MobileListView {
             adapter.notifyDataSetChanged();
             recyclerView.smoothScrollToPosition(0);
         }
+    }
+
+    public void removeFavorite(PhoneListDisplayEntity entity) {
+        favoriteIds.remove(entity);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

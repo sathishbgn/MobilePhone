@@ -44,6 +44,7 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
         holder.descriptionText.setText(String.format(Locale.getDefault(), "%.2f", entity.getPrice()));
         holder.ratingBar.setRating((float) entity.getRating());
         holder.favoriteImage.setVisibility(View.INVISIBLE);
+        holder.ratingBar.setEnabled(false);
 
         Picasso.with(context)
                 .load(entity.getThumbImageURL())

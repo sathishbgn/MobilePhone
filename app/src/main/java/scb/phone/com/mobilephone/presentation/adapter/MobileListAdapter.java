@@ -26,10 +26,10 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Vi
 
     private Context context;
     private List<PhoneListDisplayEntity> list;
-    private List<Integer> favoriteIds;
+    private List<PhoneListDisplayEntity> favoriteIds;
     private MobileListView mobileListView;
 
-    public MobileListAdapter(List<PhoneListDisplayEntity> list, MobileListView view, List<Integer> favoriteIds) {
+    public MobileListAdapter(List<PhoneListDisplayEntity> list, MobileListView view, List<PhoneListDisplayEntity> favoriteIds) {
         this.list = list;
         this.mobileListView = view;
         this.favoriteIds = favoriteIds;
@@ -46,7 +46,6 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Vi
     public void onBindViewHolder(MobileListAdapter.ViewHolder holder, int position) {
         PhoneListDisplayEntity entity = list.get(position);
         holder.favoriteImage.setOnClickListener(view -> {
-            holder.favoriteImage.setEnabled(false);
             mobileListView.onFavoriteClick(entity, position);
         });
         holder.mobileCard.setOnClickListener(view -> {
@@ -55,9 +54,9 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Vi
         holder.titleText.setText(entity.getName());
         holder.descriptionTextView.setText(String.format(Locale.getDefault(), "%.2f", entity.getPrice()));
         holder.ratingBar.setRating((float) entity.getRating());
-
+        holder.favoriteImage.setEnabled(!favoriteIds.contains(entity));
         Picasso.with(context)
-                .load(favoriteIds.contains(entity.getId()) ? R.drawable.ic_favorite : R.drawable.ic_favorite_border)
+                .load(favoriteIds.contains(entity) ? R.drawable.ic_favorite : R.drawable.ic_favorite_border)
                 .fit()
                 .into(holder.favoriteImage);
 

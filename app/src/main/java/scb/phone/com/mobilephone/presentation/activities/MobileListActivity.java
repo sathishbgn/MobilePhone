@@ -167,4 +167,10 @@ public class MobileListActivity extends BaseActivity
     public List<PhoneListDisplayEntity> getList() {
         return displayEntityList;
     }
+
+    @Override
+    public void onRemovedFavorite(PhoneListDisplayEntity removedEntity) {
+        viewPager.setCurrentItem(0);
+        mobileListFragment.removeFavorite(removedEntity);
+    }
 }

@@ -95,4 +95,34 @@ public class PhoneListDisplayEntity implements Parcelable {
         return rating;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PhoneListDisplayEntity entity = (PhoneListDisplayEntity) o;
+
+        if (id != entity.id) return false;
+        if (rating != entity.rating) return false;
+        if (thumbImageURL != null ? !thumbImageURL.equals(entity.thumbImageURL) : entity.thumbImageURL != null)
+            return false;
+        if (name != null ? !name.equals(entity.name) : entity.name != null) return false;
+        if (description != null ? !description.equals(entity.description) : entity.description != null)
+            return false;
+        if (brand != null ? !brand.equals(entity.brand) : entity.brand != null) return false;
+        return price != null ? price.equals(entity.price) : entity.price == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (thumbImageURL != null ? thumbImageURL.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (brand != null ? brand.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + rating;
+        return result;
+    }
 }
