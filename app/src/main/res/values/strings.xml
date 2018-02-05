@@ -3,8 +3,8 @@
     <string name="tab_mobile_list">Mobile List</string>
     <string name="tab_favorite_list">Favorite List</string>
     <string-array name="menu_sorting">
-        <item>A-Z</item>
-        <item>Z-A</item>
-        <item>Rating</item>
+        <item>Price A-Z</item>
+        <item>Price Z-A</item>
+        <item>Rating 5-1</item>
     </string-array>
 </resources>
