@@ -1,5 +1,6 @@
 package scb.phone.com.mobilephone.presentation.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,9 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,6 +32,7 @@ public class FavoriteListFragment extends BaseFragment {
     protected RecyclerView recyclerView;
     List<PhoneListDisplayEntity> displayEntityList = new ArrayList<>();
     FavoriteListAdapter mAdapter;
+    FragmentInterface mFragmentInterface;
 
     @Nullable
     @Override
@@ -44,6 +47,34 @@ public class FavoriteListFragment extends BaseFragment {
         mAdapter = new FavoriteListAdapter(displayEntityList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
+    }
+
+    public void updateList() {
+        if (mFragmentInterface != null) {
+            displayEntityList = mFragmentInterface.getList();
+            setFavoriteList();
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof FragmentInterface) {
+            mFragmentInterface = (FragmentInterface) context;
+        }
+    }
+
+    public void sort(Comparator<PhoneListDisplayEntity> comparator) {
+        if (displayEntityList != null && mAdapter != null) {
+            Collections.sort(displayEntityList, comparator);
+            mAdapter.notifyDataSetChanged();
+            recyclerView.smoothScrollToPosition(0);
+        }
+    }
+
+    public interface FragmentInterface {
+        List<PhoneListDisplayEntity> getList();
+
     }
 
 }

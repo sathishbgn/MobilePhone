@@ -22,12 +22,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import scb.phone.com.mobilephone.R;
 import scb.phone.com.mobilephone.presentation.BaseFragment;
+import scb.phone.com.mobilephone.presentation.activities.MobileDetailActivity;
 import scb.phone.com.mobilephone.presentation.adapter.MobileListAdapter;
 import scb.phone.com.mobilephone.presentation.entity.PhoneDetailDisplayEntity;
 import scb.phone.com.mobilephone.presentation.entity.PhoneListDisplayEntity;
-import scb.phone.com.mobilephone.presentation.activities.MobileDetailActivity;
-import scb.phone.com.mobilephone.presentation.presenter.MobileListPresenter;
 import scb.phone.com.mobilephone.presentation.mobilelist.MobileListView;
+import scb.phone.com.mobilephone.presentation.presenter.MobileListPresenter;
 
 public class MobileListFragment extends BaseFragment implements MobileListView {
 
@@ -82,11 +82,12 @@ public class MobileListFragment extends BaseFragment implements MobileListView {
     }
 
     @Override
-    public void onFavoriteClick(PhoneListDisplayEntity phoneListDisplayEntity) {
+    public void onFavoriteClick(PhoneListDisplayEntity phoneListDisplayEntity, int position) {
+        favoriteIds.add(phoneListDisplayEntity.getId());
+        adapter.notifyItemChanged(position);
         if (mFragmentInteract != null) {
             mFragmentInteract.onFavoriteClick(phoneListDisplayEntity);
         }
-        favoriteIds.add(phoneListDisplayEntity.getId());
     }
 
     @Override

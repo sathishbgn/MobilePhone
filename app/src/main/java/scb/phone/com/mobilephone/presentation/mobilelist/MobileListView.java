@@ -11,5 +11,5 @@ public interface MobileListView extends BaseView {
     void onCardClick(PhoneListDisplayEntity entity);
     void setMobileLists(List<PhoneListDisplayEntity> displayEntityList);
     void goToMobileDetail(PhoneDetailDisplayEntity entity);
-    void onFavoriteClick(PhoneListDisplayEntity phoneListDisplayEntity);
+    void onFavoriteClick(PhoneListDisplayEntity phoneListDisplayEntity, int position);
 }

@@ -38,11 +38,7 @@ public class DataModule {
     PhoneListDisplayMapper providePhoneListDisplayMapper() {
         return new PhoneListDisplayMapper();
     }
-
-    private Retrofit.Builder retrofitBuilder;
-    private Retrofit retrofit;
-
-
+    
     @Provides
     @Singleton
     Retrofit buildRetrofit() {

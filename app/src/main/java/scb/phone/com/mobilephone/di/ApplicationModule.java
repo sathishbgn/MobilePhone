@@ -5,6 +5,8 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Environment;
 
+import com.google.gson.Gson;
+
 import java.io.File;
 
 import javax.inject.Named;
@@ -68,5 +70,11 @@ public class ApplicationModule {
     @Named("observerOn")
     ThreadExecutor provideObserverOnExecutionThread() {
         return new ThreadExecutor(AndroidSchedulers.mainThread());
+    }
+
+    @Provides
+    @Singleton
+    Gson provideGson() {
+        return new Gson();
     }
 }

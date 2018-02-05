@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,13 +46,14 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Vi
     public void onBindViewHolder(MobileListAdapter.ViewHolder holder, int position) {
         PhoneListDisplayEntity entity = list.get(position);
         holder.favoriteImage.setOnClickListener(view -> {
-            mobileListView.onFavoriteClick(entity);
+            holder.favoriteImage.setEnabled(false);
+            mobileListView.onFavoriteClick(entity, position);
         });
         holder.mobileCard.setOnClickListener(view -> {
             mobileListView.onCardClick(entity);
         });
         holder.titleText.setText(entity.getName());
-        holder.descriptionTextView.setText(entity.getBrand());
+        holder.descriptionTextView.setText(String.format(Locale.getDefault(), "%.2f", entity.getPrice()));
         holder.ratingBar.setRating((float) entity.getRating());
 
         Picasso.with(context)

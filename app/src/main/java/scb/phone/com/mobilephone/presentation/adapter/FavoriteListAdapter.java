@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,13 +39,14 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
 
     @Override
     public void onBindViewHolder(FavoriteListAdapter.ViewHolder holder, int position) {
-        PhoneListDisplayEntity eneity = list.get(position);
-        holder.titleText.setText(list.get(position).getName());
-        holder.ratingBar.setRating((float) eneity.getRating());
+        PhoneListDisplayEntity entity = list.get(position);
+        holder.titleText.setText(entity.getName());
+        holder.descriptionText.setText(String.format(Locale.getDefault(), "%.2f", entity.getPrice()));
+        holder.ratingBar.setRating((float) entity.getRating());
         holder.favoriteImage.setVisibility(View.INVISIBLE);
 
         Picasso.with(context)
-                .load(eneity.getThumbImageURL())
+                .load(entity.getThumbImageURL())
                 .placeholder(R.drawable.bankicon_scb)
                 .error(R.mipmap.ic_launcher_round)
                 .fit()
@@ -63,6 +65,9 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
 
         @BindView(R.id.title_text_view)
         TextView titleText;
+
+        @BindView(R.id.description_text_view)
+        TextView descriptionText;
 
         @BindView(R.id.favorite_image)
         ImageView favoriteImage;

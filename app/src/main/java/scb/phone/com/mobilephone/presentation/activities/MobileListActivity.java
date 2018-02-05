@@ -11,7 +11,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -26,7 +28,9 @@ import scb.phone.com.mobilephone.presentation.fragments.FavoriteListFragment;
 import scb.phone.com.mobilephone.presentation.fragments.MobileListFragment;
 import scb.phone.com.mobilephone.presentation.presenter.MobileListPresenter;
 
-public class MobileListActivity extends BaseActivity implements MobileListFragment.FragmentInteract {
+public class MobileListActivity extends BaseActivity
+        implements MobileListFragment.FragmentInteract,
+        FavoriteListFragment.FragmentInterface {
 
     @BindView(R.id.tabs)
     protected TabLayout tabLayout;
@@ -40,15 +44,17 @@ public class MobileListActivity extends BaseActivity implements MobileListFragme
     private MobileListFragment mobileListFragment;
     private FavoriteListFragment favoriteListFragment;
 
+    private List<PhoneListDisplayEntity> displayEntityList = new ArrayList<>();
+
     @Inject
     MobileListPresenter presenter;
 
     AlertDialog dialog;
     int mMenuSortSelected = 0;
 
-    private final Comparator<PhoneListDisplayEntity> sortAZ = (prev, next) -> prev.getName().compareTo(next.getName());
-    private final Comparator<PhoneListDisplayEntity> sortZA = (prev, next) -> next.getName().compareTo(prev.getName());
-    private final Comparator<PhoneListDisplayEntity> sortRating = (prev, next) -> String.valueOf(prev.getRating()).compareTo(String.valueOf(next.getRating()));
+    private final Comparator<PhoneListDisplayEntity> sortAZ = (prev, next) -> prev.getPrice().compareTo(next.getPrice());
+    private final Comparator<PhoneListDisplayEntity> sortZA = (prev, next) -> next.getPrice().compareTo(prev.getPrice());
+    private final Comparator<PhoneListDisplayEntity> sortRating = (prev, next) -> String.valueOf(next.getRating()).compareTo(String.valueOf(prev.getRating()));
 
     @Override
     public void onAttachFragment(Fragment fragment) {
@@ -106,17 +112,31 @@ public class MobileListActivity extends BaseActivity implements MobileListFragme
                         (dialogInterface, i) -> {
                             mMenuSortSelected = i;
                             dialog.hide();
-                            if (i == 1) {
-                                mobileListFragment.sort(sortZA);
-                            } else if (i == 2) {
-                                mobileListFragment.sort(sortRating);
-                            } else {
-                                mobileListFragment.sort(sortAZ);
-                            }
+                            sort(i);
                         })
                 .create();
         dialog.show();
+    }
 
+    private void sort(int sortOptions) {
+        if (viewPager.getCurrentItem() == 1) {
+            if (sortOptions == 1) {
+                favoriteListFragment.sort(sortZA);
+            } else if (sortOptions == 2) {
+                favoriteListFragment.sort(sortRating);
+            } else {
+                favoriteListFragment.sort(sortAZ);
+            }
+        } else {
+
+            if (sortOptions == 1) {
+                mobileListFragment.sort(sortZA);
+            } else if (sortOptions == 2) {
+                mobileListFragment.sort(sortRating);
+            } else {
+                mobileListFragment.sort(sortAZ);
+            }
+        }
     }
 
     @Override
@@ -133,5 +153,18 @@ public class MobileListActivity extends BaseActivity implements MobileListFragme
     public void onFavoriteClick(PhoneListDisplayEntity phoneListDisplayEntity) {
         Toast.makeText(this, String.format("You have added %s to favorite list", phoneListDisplayEntity.getName()), Toast.LENGTH_SHORT).show();
         viewPager.setCurrentItem(1);
+        displayEntityList.add(phoneListDisplayEntity);
+        if (favoriteListFragment != null) {
+            favoriteListFragment.updateList();
+        }
+    }
+
+    /**
+     * to able to send value back to FavoriteFragment
+     * @return
+     */
+    @Override
+    public List<PhoneListDisplayEntity> getList() {
+        return displayEntityList;
     }
 }
