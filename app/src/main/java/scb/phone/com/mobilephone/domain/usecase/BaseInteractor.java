@@ -8,10 +8,6 @@ import io.reactivex.internal.disposables.ListCompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import scb.phone.com.mobilephone.domain.ThreadExecutor;
 
-/**
- * Created by sathish on 1/2/2018 AD.
- */
-
 public class BaseInteractor {
 
     protected ThreadExecutor subscriberOn;

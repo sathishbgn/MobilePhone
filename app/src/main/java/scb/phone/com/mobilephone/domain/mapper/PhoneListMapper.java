@@ -1,20 +1,22 @@
 package scb.phone.com.mobilephone.domain.mapper;
 
-import scb.phone.com.mobilephone.data.entity.PhoneEntity;
-import scb.phone.com.mobilephone.data.entity.PhoneImageEntity;
-import scb.phone.com.mobilephone.domain.enity.PhoneListDomain;
+import java.util.List;
 
-/**
- * Created by sathish on 1/2/2018 AD.
- */
+import javax.inject.Inject;
+
+import scb.phone.com.mobilephone.presentation.entity.PhoneDetailDisplayEntity;
+import scb.phone.com.mobilephone.presentation.entity.PhoneListDisplayEntity;
 
 public class PhoneListMapper {
 
-    public PhoneListDomain transform(PhoneEntity phoneListEntity) {
-        return new PhoneListDomain();
+    @Inject
+    public PhoneListMapper() {
     }
 
-    public PhoneListDomain transform(PhoneImageEntity phoneImageEntity) {
-        return new PhoneListDomain();
+    public PhoneDetailDisplayEntity transform(PhoneListDisplayEntity entity, List<String> imageURLs) {
+        PhoneDetailDisplayEntity detailEntity = new PhoneDetailDisplayEntity();
+        detailEntity.setDetail(entity);
+        detailEntity.setImageURLs(imageURLs);
+        return detailEntity;
     }
 }

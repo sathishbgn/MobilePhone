@@ -2,4 +2,9 @@
     <string name="app_name">MobilePhone</string>
     <string name="tab_mobile_list">Mobile List</string>
     <string name="tab_favorite_list">Favorite List</string>
+    <string-array name="menu_sorting">
+        <item>A-Z</item>
+        <item>Z-A</item>
+        <item>Rating</item>
+    </string-array>
 </resources>

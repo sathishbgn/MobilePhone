@@ -2,11 +2,7 @@ package scb.phone.com.mobilephone.presentation;
 
 import android.support.annotation.CallSuper;
 
-/**
- * Created by sathish on 1/2/2018 AD.
- */
-
-public class BasePresenter<T extends BaseView> {
+public abstract class BasePresenter<T extends BaseView> {
 
     public interface ViewFunction<V> {
         void execute(V view);
@@ -31,7 +27,7 @@ public class BasePresenter<T extends BaseView> {
         return view != null;
     }
 
-    protected void doInView(ViewFunction<T> viewFunction) {
+    public void doInView(ViewFunction<T> viewFunction) {
         if (isViewAttached()) {
             viewFunction.execute(view);
         }
@@ -43,7 +39,7 @@ public class BasePresenter<T extends BaseView> {
         }
     }
 
-    protected void hideLoading() {
+    public void hideLoading() {
         if (isViewAttached()) {
             view.hideLoading();
         }

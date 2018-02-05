@@ -1,10 +1,9 @@
 package scb.phone.com.mobilephone.domain;
 
-import io.reactivex.Scheduler;
+import javax.inject.Inject;
 
-/**
- * Created by sathish on 1/2/2018 AD.
- */
+import dagger.Module;
+import io.reactivex.Scheduler;
 
 public class ThreadExecutor {
 
