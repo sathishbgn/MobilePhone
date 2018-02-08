@@ -11,11 +11,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.Locale;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 import scb.phone.com.mobilephone.R;
 import scb.phone.com.mobilephone.presentation.entity.PhoneDetailDisplayEntity;
 
@@ -29,7 +26,7 @@ public class ImageSlideAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return this.entity.getImageURLs().size();
+        return this.entity.getImageURL().size();
     }
 
     @NonNull
@@ -38,12 +35,11 @@ public class ImageSlideAdapter extends PagerAdapter {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_image, container, false);
         ViewHolder viewHolder = new ViewHolder(view);
         Picasso.with(container.getContext())
-                .load(entity.getImageURLs().get(position))
+                .load(entity.getImageURL().get(position))
                 .error(R.color.scb_purble)
-                .fit()
                 .into(viewHolder.imgDetail);
-        viewHolder.priceText.setText(String.format(Locale.getDefault(), "%.2f", entity.getDetail().getPrice()));
-        viewHolder.ratingBar.setRating((float) entity.getDetail().getRating());
+        viewHolder.priceText.setText("Price: $" + entity.getDetail().getPrice());
+        viewHolder.ratingBar.setText("Rating: " + entity.getDetail().getRating());
         container.addView(view);
         return view;
     }
@@ -60,8 +56,8 @@ public class ImageSlideAdapter extends PagerAdapter {
 
     static class ViewHolder {
 
-        @BindView(R.id.rating_bar)
-        MaterialRatingBar ratingBar;
+        @BindView(R.id.rating_text)
+        TextView ratingBar;
         @BindView(R.id.price_text)
         TextView priceText;
         @BindView(R.id.img_detail)

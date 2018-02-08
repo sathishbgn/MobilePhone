@@ -1,11 +1,13 @@
 package scb.phone.com.mobilephone.data.network;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import scb.phone.com.mobilephone.data.entity.PhoneEntity;
 import scb.phone.com.mobilephone.data.entity.PhoneImageEntity;
+import scb.phone.com.mobilephone.data.entity.PhoneListEntity;
 
 public class PhoneListApi {
 
@@ -16,11 +18,11 @@ public class PhoneListApi {
         this.phoneListService = phoneListService;
     }
 
-    public Observable<PhoneEntity> getPhoneList() {
+    public Observable<List<PhoneListEntity>> getPhoneList() {
         return phoneListService.getPhoneList();
     }
 
-    public Observable<PhoneImageEntity> getPhoneImageUrl(int id) {
+    public Observable<List<PhoneImageEntity>> getPhoneImageUrl(int id) {
         return phoneListService.getPhoneImageList(id);
     }
 }

@@ -13,11 +13,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 import scb.phone.com.mobilephone.R;
 import scb.phone.com.mobilephone.presentation.entity.PhoneListDisplayEntity;
 import scb.phone.com.mobilephone.presentation.mobilelist.MobileListView;
@@ -52,8 +50,9 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Vi
             mobileListView.onCardClick(entity);
         });
         holder.titleText.setText(entity.getName());
-        holder.descriptionTextView.setText(String.format(Locale.getDefault(), "%.2f", entity.getPrice()));
-        holder.ratingBar.setRating((float) entity.getRating());
+        holder.descriptionTextView.setText(entity.getDescription());
+        holder.priceTextView.setText("Price: $" + entity.getPrice());
+        holder.ratingTextView.setText("Rating: " + entity.getRating());
         holder.favoriteImage.setEnabled(!favoriteIds.contains(entity));
         Picasso.with(context)
                 .load(favoriteIds.contains(entity) ? R.drawable.ic_favorite : R.drawable.ic_favorite_border)
@@ -84,14 +83,17 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Vi
         @BindView(R.id.description_text_view)
         TextView descriptionTextView;
 
+        @BindView(R.id.price_text_view)
+        TextView priceTextView;
+
         @BindView(R.id.favorite_image)
         ImageView favoriteImage;
 
         @BindView(R.id.mobile_card)
         CardView mobileCard;
 
-        @BindView(R.id.rating_bar)
-        MaterialRatingBar ratingBar;
+        @BindView(R.id.rating_text_view)
+        TextView ratingTextView;
 
         @BindView(R.id.thumb_image)
         ImageView thumbImage;

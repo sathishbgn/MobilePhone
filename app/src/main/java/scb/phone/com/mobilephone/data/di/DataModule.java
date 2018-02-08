@@ -43,7 +43,7 @@ public class DataModule {
     @Singleton
     Retrofit buildRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://scb-jenbodin.firebaseapp.com")
+                .baseUrl("https://scb-test-mobile.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

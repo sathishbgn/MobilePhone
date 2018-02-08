@@ -1,16 +1,18 @@
 package scb.phone.com.mobilephone.data.network;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
-import scb.phone.com.mobilephone.data.entity.PhoneEntity;
+import retrofit2.http.Path;
 import scb.phone.com.mobilephone.data.entity.PhoneImageEntity;
+import scb.phone.com.mobilephone.data.entity.PhoneListEntity;
 
 public interface PhoneListService {
 
-    @GET("/public/list.json")
-    Observable<PhoneEntity> getPhoneList();
+    @GET("/api/mobiles/")
+    Observable<List<PhoneListEntity>> getPhoneList();
 
-    @GET("/public/detail.json")
-    Observable<PhoneImageEntity> getPhoneImageList(@Query("id") int id);
+    @GET("/api/mobiles/{id}/images")
+    Observable<List<PhoneImageEntity>> getPhoneImageList(@Path("id") int id);
 }

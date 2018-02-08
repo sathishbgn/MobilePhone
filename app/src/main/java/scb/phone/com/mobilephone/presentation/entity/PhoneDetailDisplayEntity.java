@@ -10,20 +10,31 @@ import java.util.List;
  */
 
 public class PhoneDetailDisplayEntity implements Parcelable {
-    private List<String> imageURLs;
+
+    private List<Integer> id;
+    private List<Integer> mobileId;
+    private List<String> imageURL;
     private PhoneListDisplayEntity detail;
 
-    public PhoneDetailDisplayEntity() {
+    public PhoneDetailDisplayEntity(List<Integer> id, List<Integer> mobileId, List<String> imageURL, PhoneListDisplayEntity detail) {
+        this.id = id;
+        this.mobileId = mobileId;
+        this.imageURL = imageURL;
+        this.detail = detail;
     }
 
     protected PhoneDetailDisplayEntity(Parcel in) {
-        imageURLs = in.createStringArrayList();
+        id = in.readArrayList(Integer.class.getClassLoader());
+        mobileId = in.readArrayList(Integer.class.getClassLoader());
+        imageURL = in.createStringArrayList();
         detail = in.readParcelable(PhoneListDisplayEntity.class.getClassLoader());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringList(imageURLs);
+        dest.writeList(id);
+        dest.writeList(mobileId);
+        dest.writeStringList(imageURL);
         dest.writeParcelable(detail, flags);
     }
 
@@ -44,21 +55,19 @@ public class PhoneDetailDisplayEntity implements Parcelable {
         }
     };
 
-    public List<String> getImageURLs() {
-        return imageURLs;
+    public List<Integer> getId() {
+        return id;
     }
 
-    public void setImageURLs(List<String> imageURLs) {
-        this.imageURLs = imageURLs;
+    public List<Integer> getMobileId() {
+        return mobileId;
+    }
+
+    public List<String> getImageURL() {
+        return imageURL;
     }
 
     public PhoneListDisplayEntity getDetail() {
         return detail;
     }
-
-    public void setDetail(PhoneListDisplayEntity detail) {
-        this.detail = detail;
-    }
-
-
 }

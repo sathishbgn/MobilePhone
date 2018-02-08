@@ -17,7 +17,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 import scb.phone.com.mobilephone.R;
 import scb.phone.com.mobilephone.presentation.entity.PhoneListDisplayEntity;
 
@@ -42,7 +41,7 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
         PhoneListDisplayEntity entity = list.get(position);
         holder.titleText.setText(entity.getName());
         holder.descriptionText.setText(String.format(Locale.getDefault(), "%.2f", entity.getPrice()));
-        holder.ratingBar.setRating((float) entity.getRating());
+        holder.ratingBar.setText("Rating: " + entity.getRating());
         holder.favoriteImage.setVisibility(View.INVISIBLE);
         holder.ratingBar.setEnabled(false);
 
@@ -76,8 +75,8 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
         @BindView(R.id.mobile_card)
         CardView mobileCard;
 
-        @BindView(R.id.rating_bar)
-        MaterialRatingBar ratingBar;
+        @BindView(R.id.price_text_view)
+        TextView ratingBar;
 
         @BindView(R.id.thumb_image)
         ImageView thumbImage;

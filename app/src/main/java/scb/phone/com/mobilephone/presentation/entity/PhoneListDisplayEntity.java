@@ -23,7 +23,7 @@ public class PhoneListDisplayEntity implements Parcelable {
 
     private BigDecimal price;
 
-    private int rating;
+    private double rating;
 
     public PhoneListDisplayEntity() {
 
@@ -47,7 +47,7 @@ public class PhoneListDisplayEntity implements Parcelable {
         dest.writeString(description);
         dest.writeString(brand);
         dest.writeString(price.toString());
-        dest.writeInt(rating);
+        dest.writeDouble(rating);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class PhoneListDisplayEntity implements Parcelable {
         return price;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
@@ -114,15 +114,17 @@ public class PhoneListDisplayEntity implements Parcelable {
         return price != null ? price.equals(entity.price) : entity.price == null;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
+    @Override public int hashCode() {
+        int result;
+        long temp;
+        result = id;
         result = 31 * result + (thumbImageURL != null ? thumbImageURL.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (brand != null ? brand.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + rating;
+        temp = Double.doubleToLongBits(rating);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 }

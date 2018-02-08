@@ -23,7 +23,7 @@ public class PhoneListEntity {
     @SerializedName("price")
     private BigDecimal price;
     @SerializedName("rating")
-    private int rating;
+    private double rating;
 
 
     public int getId() {
@@ -50,7 +50,7 @@ public class PhoneListEntity {
         return price;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 }

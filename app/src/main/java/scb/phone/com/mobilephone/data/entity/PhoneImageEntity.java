@@ -2,18 +2,28 @@ package scb.phone.com.mobilephone.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * Created by sathish on 1/2/2018 AD.
  */
 
 public class PhoneImageEntity {
 
-    @SerializedName("imageURLs")
-    private List<String> imageURLs;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("mobile_id")
+    private int mobileId;
+    @SerializedName("url")
+    private String imageURL;
 
-    public List<String> getImageURLs() {
-        return imageURLs;
+    public int getId() {
+        return id;
+    }
+
+    public int getMobileId() {
+        return mobileId;
+    }
+
+    public String getImageURL() {
+        return imageURL;
     }
 }

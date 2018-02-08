@@ -35,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/thumb_image"
+                android:textColor="@android:color/black"
                 android:textSize="22sp"
                 android:maxLines="1"
                 android:ellipsize="end"
@@ -47,17 +48,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                tools:text="description"/>
+
+            <TextView
+                android:id="@+id/price_text_view"
+                android:layout_toRightOf="@+id/thumb_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:textSize="16sp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 tools:text="description"/>
 
-            <me.zhanghai.android.materialratingbar.MaterialRatingBar
-                android:id="@+id/rating_bar"
+            <TextView
+                android:id="@+id/rating_text_view"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@+id/thumb_image"
-                style="@style/Widget.MaterialRatingBar.RatingBar" />
+                android:textSize="16sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="description"/>
 
             <ImageView
                 android:id="@+id/favorite_image"
@@ -65,7 +80,7 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_favorite_border"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
                 android:adjustViewBounds="true"/>
 
         </RelativeLayout>

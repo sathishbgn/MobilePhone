@@ -39,6 +39,6 @@ public class PhoneCase extends BaseInteractor {
     public Observable<PhoneDetailDisplayEntity> getPhoneImageList(PhoneListDisplayEntity entity) {
         Log.d("log", "getPhoneImageList" + entity);
         return withObservable(phoneListApi.getPhoneImageUrl(entity.getId()).flatMap(phoneImageEntity ->
-                Observable.just(phoneListMapper.transform(entity, phoneImageEntity.getImageURLs()))));
+                Observable.just(phoneListMapper.transform(entity, phoneImageEntity))));
     }
 }

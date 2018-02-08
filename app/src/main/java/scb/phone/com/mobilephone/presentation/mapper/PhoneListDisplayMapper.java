@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import scb.phone.com.mobilephone.data.entity.PhoneEntity;
 import scb.phone.com.mobilephone.data.entity.PhoneListEntity;
 import scb.phone.com.mobilephone.presentation.entity.PhoneListDisplayEntity;
 
@@ -30,12 +29,12 @@ public class PhoneListDisplayMapper {
         return gson.fromJson(gson.toJson(entity), PhoneListDisplayEntity.class);
     }
 
-    public List<PhoneListDisplayEntity> transform(PhoneEntity entity) {
+    public List<PhoneListDisplayEntity> transform(List<PhoneListEntity> entity) {
         if (entity == null) {
             return null;
         }
         List<PhoneListDisplayEntity> listDisplayEntities = new ArrayList<>();
-        List<PhoneListEntity> list = entity.getPhoneListEntities();
+        List<PhoneListEntity> list = entity;
         for (PhoneListEntity item : list) {
             listDisplayEntities.add(transform(item));
         }
